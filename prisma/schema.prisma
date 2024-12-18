@@ -8,59 +8,58 @@ datasource db {
 }
 
 model User {
-  id        String         @id @default(uuid())
-  email     String?        @unique
-  password  String?
-  avatar    String?
+  id       String  @id @default(uuid())
+  email    String? @unique
+  password String?
+  avatar   String?
 
-  createdAt DateTime       @default(now())
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
-  posts     FeedbackPost[]
-  comments  Comment[]
-  upvotes   Upvote[]
+  posts    FeedbackPost[]
+  comments Comment[]
+  upvotes  Upvote[]
 }
 
 model FeedbackPost {
-  id          String    @id @default(uuid())
+  id          String @id @default(uuid())
   title       String
   description String
   category    String
   status      String
-  authorId    Int
-  userId      String?
+  user_id     String
 
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
-  comments    Comment[]
-  upvotes     Upvote[]
-  User        User?     @relation(fields: [userId], references: [id])
+  comments Comment[]
+  upvotes  Upvote[]
+  User     User      @relation(fields: [user_id], references: [id])
 }
 
 model Comment {
-  id              String       @id @default(uuid())
-  content         String
-  authorId        Int
-  postId          String
-  parentCommentId String?
-  userId          String?
+  id                String  @id @default(uuid())
+  content           String
+  parent_comment_id String?
+  post_id           String
+  user_id           String
 
-  createdAt       DateTime     @default(now())
-  updatedAt       DateTime     @updatedAt
-  
-  post            FeedbackPost @relation(fields: [postId], references: [id])
-  parentComment   Comment?     @relation("NestedComments", fields: [parentCommentId], references: [id])
-  childComments   Comment[]    @relation("NestedComments")
-  User            User?        @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  post          FeedbackPost @relation(fields: [post_id], references: [id])
+  parentComment Comment?     @relation("NestedComments", fields: [parent_comment_id], references: [id])
+  childComments Comment[]    @relation("NestedComments")
+  User          User         @relation(fields: [user_id], references: [id])
 }
 
 model Upvote {
-  id     String       @id @default(uuid())
-  userId String
-  postId String
-  
-  post   FeedbackPost @relation(fields: [postId], references: [id])
-  User   User         @relation(fields: [userId], references: [id])
+  id      String @id @default(uuid())
+  post_id String
+  user_id String
 
-  @@unique([userId, postId])
+  post FeedbackPost @relation(fields: [post_id], references: [id])
+  User User         @relation(fields: [user_id], references: [id])
+
+  @@unique([user_id, post_id])
 }
