@@ -25,8 +25,8 @@ model FeedbackPost {
   id          String @id @default(uuid())
   title       String
   description String
-  category    String
-  status      String
+  status_id   String
+  category_id String
   user_id     String
 
   created_at DateTime @default(now())
@@ -34,7 +34,29 @@ model FeedbackPost {
 
   comments Comment[]
   upvotes  Upvote[]
-  User     User      @relation(fields: [user_id], references: [id])
+  category Category  @relation(fields: [category_id], references: [id])
+  status   Status    @relation(fields: [status_id], references: [id])
+  user     User      @relation(fields: [user_id], references: [id])
+}
+
+model Category {
+  id   String @id @default(uuid())
+  name String @unique
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  feedbackPosts FeedbackPost[]
+}
+
+model Status {
+  id   String @id @default(uuid())
+  name String @unique
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  feedbackPosts FeedbackPost[]
 }
 
 model Comment {
@@ -50,7 +72,7 @@ model Comment {
   post          FeedbackPost @relation(fields: [post_id], references: [id])
   parentComment Comment?     @relation("NestedComments", fields: [parent_comment_id], references: [id])
   childComments Comment[]    @relation("NestedComments")
-  User          User         @relation(fields: [user_id], references: [id])
+  user          User         @relation(fields: [user_id], references: [id])
 }
 
 model Upvote {
@@ -59,7 +81,7 @@ model Upvote {
   user_id String
 
   post FeedbackPost @relation(fields: [post_id], references: [id])
-  User User         @relation(fields: [user_id], references: [id])
+  user User         @relation(fields: [user_id], references: [id])
 
   @@unique([user_id, post_id])
 }
