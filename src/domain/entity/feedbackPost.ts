@@ -12,17 +12,17 @@ export interface IFeedbackPost extends FeedbackPost {}
  *            - created_at
  *          properties:
  *            id:
- *                type: integer
+ *                type: string
  *            title:
  *                type: string
  *            description:
  *                type: string
  *            category_id:
- *                type: integer
+ *                type: string
  *            status_id:
- *                type: integer
- *            author_id:
- *                type: integer
+ *                type: string
+ *            user_id:
+ *                type: string
  *            created_at:
  *                type: string
  *                format: date

@@ -1,18 +1,18 @@
 import { AuthUseCase, buildAuthUseCase } from './auth';
-import { buildExampleUseCase, ExampleUseCase } from './example'
+import { buildFeedbackPostUseCase, FeedbackPostUseCase } from './feedbackPost';
 import { UseCaseParams } from './types';
 
 export type UseCase = {
   auth: AuthUseCase;
-  example: ExampleUseCase;
-}
+  feedbackPost: FeedbackPostUseCase;
+};
 
 export const buildUseCase = (params: UseCaseParams): UseCase => {
   const auth = buildAuthUseCase(params);
-  const example = buildExampleUseCase(params);
+  const feedbackPost = buildFeedbackPostUseCase(params);
 
   return {
     auth,
-    example
-  }
-}
+    feedbackPost,
+  };
+};
