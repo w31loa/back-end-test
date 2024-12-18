@@ -8,9 +8,59 @@ datasource db {
 }
 
 model User {
-  id                              String                @id @default(uuid())
-  email                           String?               @unique
-  password                        String?
-  avatar                          String?
-  created_at                      DateTime              @default(now())
+  id        String         @id @default(uuid())
+  email     String?        @unique
+  password  String?
+  avatar    String?
+
+  createdAt DateTime       @default(now())
+
+  posts     FeedbackPost[]
+  comments  Comment[]
+  upvotes   Upvote[]
+}
+
+model FeedbackPost {
+  id          String    @id @default(uuid())
+  title       String
+  description String
+  category    String
+  status      String
+  authorId    Int
+  userId      String?
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  comments    Comment[]
+  upvotes     Upvote[]
+  User        User?     @relation(fields: [userId], references: [id])
+}
+
+model Comment {
+  id              String       @id @default(uuid())
+  content         String
+  authorId        Int
+  postId          String
+  parentCommentId String?
+  userId          String?
+
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+  
+  post            FeedbackPost @relation(fields: [postId], references: [id])
+  parentComment   Comment?     @relation("NestedComments", fields: [parentCommentId], references: [id])
+  childComments   Comment[]    @relation("NestedComments")
+  User            User?        @relation(fields: [userId], references: [id])
+}
+
+model Upvote {
+  id     String       @id @default(uuid())
+  userId String
+  postId String
+  
+  post   FeedbackPost @relation(fields: [postId], references: [id])
+  User   User         @relation(fields: [userId], references: [id])
+
+  @@unique([userId, postId])
 }
