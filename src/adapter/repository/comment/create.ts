@@ -1,14 +1,15 @@
 import { AdapterParams, UnknownTx } from '@/adapter/types';
 import { Prisma } from '@prisma/client';
-import { IUser } from '@/domain/entity/user';
+import { IComment } from '@/domain/entity/comment';
+
 type Params = Pick<AdapterParams, 'db'>;
 
 export type Create = (
-  data: Prisma.UserCreateArgs,
+  data: Prisma.CommentCreateArgs,
   tx?: UnknownTx
-) => Promise<IUser | never>;
+) => Promise<IComment | never>;
 export const buildCreate = ({ db }: Params): Create => {
   return async (data, tx) => {
-    return (await db.getContextClient(tx).user.create(data)) as IUser;
+    return (await db.getContextClient(tx).comment.create(data)) as IComment;
   };
 };

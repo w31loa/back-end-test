@@ -1,19 +1,18 @@
 import { AdapterParams, UnknownTx } from '@/adapter/types';
 import { Prisma } from '@prisma/client';
-import { IUser } from '@/domain/entity/user';
+import { IComment } from '@/domain/entity/comment';
 
 type Params = Pick<AdapterParams, 'db'>;
 
 export type Update = (
-  params: Prisma.UserUpdateArgs,
+  where: Prisma.CommentWhereUniqueInput,
+  data: Prisma.CommentUpdateInput,
   tx?: UnknownTx
-) => Promise<IUser | never>;
+) => Promise<IComment | never>;
 export const buildUpdate = ({ db }: Params): Update => {
-  return async (getParams, tx) => {
-    const user = (await db
+  return async (where, data, tx) => {
+    return (await db
       .getContextClient(tx)
-      .user.update(getParams)) as IUser;
-
-    return user;
+      .comment.update({ where, data })) as IComment;
   };
 };

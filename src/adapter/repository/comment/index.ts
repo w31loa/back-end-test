@@ -1,33 +1,30 @@
 import { AdapterParams } from '@/adapter/types';
-import { buildCount, Count } from './count';
-import { buildDelete, Delete } from './delete';
-import { buildUpdate, Update } from './update';
-import { List, buildList } from './list';
 import { buildCreate, Create } from './create';
+import { buildDelete, Delete } from './delete';
 import { buildGet, Get } from './get';
+import { buildList, List } from './list';
+import { buildUpdate, Update } from './update';
 
 type Params = Pick<AdapterParams, 'db'>;
 
-export type UserRepository = {
-  count: Count;
+export type CommentRepository = {
   create: Create;
   delete: Delete;
   get: Get;
   list: List;
   update: Update;
 };
-export const buildUserRepository = (params: Params): UserRepository => {
-  const count = buildCount(params);
+
+export const buildCommentRepository = (params: Params): CommentRepository => {
   const create = buildCreate(params);
-  const deleteUser = buildDelete(params);
+  const deleteComment = buildDelete(params);
   const get = buildGet(params);
   const list = buildList(params);
   const update = buildUpdate(params);
 
   return {
-    count,
     create,
-    delete: deleteUser,
+    delete: deleteComment,
     get,
     list,
     update,
