@@ -11,8 +11,7 @@ export const buildCreate = ({feedbackPost}: Params): Create=>{
       description: req.body.description,
       category_id: req.body.category_id,
       status_id: req.body.status_id,
-    // @ts-ignore
-      user_id: req.user.id
+      user_id: req.user!.id
     });
 
     return res.status(200).json(data);

@@ -1,5 +1,5 @@
 import * as client from './lib/clients';
-import {config as cfg, config, devMode} from '@/config';
+import { config as cfg, devMode } from '@/config';
 import * as adapter from '@/adapter';
 import * as usecase from '@/domain/usecase';
 import * as service from '@/domain/service';
@@ -11,11 +11,11 @@ import os from 'node:os';
 import { log, logger } from './lib/logger';
 import chalk from 'chalk';
 
-process.on('uncaughtException', function(err) { 
+process.on('uncaughtException', function (err) {
   logger.log({
     level: 'error',
     message: err.message,
-    stack: err.stack
+    stack: err.stack,
   });
 });
 
@@ -28,39 +28,36 @@ const entry = async () => {
   if (cluster.isPrimary) {
     log('Server starting...');
   }
-  
+
   const db = client.prismaClient.newClient({
     user: cfg.postgres.user,
     password: cfg.postgres.password,
     host: cfg.postgres.host,
     port: cfg.postgres.port,
-    db: cfg.postgres.db
-  });
-
-  const example = await client.example.newClient({
-    message: config.example.message
+    db: cfg.postgres.db,
   });
 
   const ad = adapter.buildAdapter({
     db,
-    example
   });
 
   const svc = service.buildService(ad);
 
   const uc = usecase.buildUseCase({
     service: svc,
-    adapter: ad
+    adapter: ad,
   });
 
   if (cluster.isPrimary) {
     if (!devMode) {
-      const workerCount = process.env.WORKER_COUNT ? parseInt(process.env.WORKER_COUNT) : os.cpus().length - 1;
+      const workerCount = process.env.WORKER_COUNT
+        ? parseInt(process.env.WORKER_COUNT)
+        : os.cpus().length - 1;
 
       for (let i = 0; i < workerCount; i++) {
         cluster.fork();
       }
-    
+
       cluster.on('exit', (worker) => {
         log(`Worker ${worker.process.pid} died.`);
       });
@@ -72,9 +69,17 @@ const entry = async () => {
     const serverHost = cfg.http.host;
 
     log(
-      `Server started ${chalk.blue(`[Port: ${serverPort}]`)} ${devMode ? chalk.red('[Dev Mode]') : chalk.green('[Prod Mode]')}\n` +
-      `\tAPI URL: ${chalk.gray.underline(`http://${serverHost}:${serverPort}/api/v1`)}\n` +
-      `\tSwagger URL: ${chalk.gray.underline(`http://${serverHost}:${serverPort}/api/v1/swagger`)} (OpenAPI: ${chalk.gray.underline(`http://${serverHost}:${serverPort}/api/v1/swagger.json`)} )\n`
+      `Server started ${chalk.blue(`[Port: ${serverPort}]`)} ${
+        devMode ? chalk.red('[Dev Mode]') : chalk.green('[Prod Mode]')
+      }\n` +
+        `\tAPI URL: ${chalk.gray.underline(
+          `http://${serverHost}:${serverPort}/api/v1`
+        )}\n` +
+        `\tSwagger URL: ${chalk.gray.underline(
+          `http://${serverHost}:${serverPort}/api/v1/swagger`
+        )} (OpenAPI: ${chalk.gray.underline(
+          `http://${serverHost}:${serverPort}/api/v1/swagger.json`
+        )} )\n`
     );
 
     if (!devMode) {
@@ -108,6 +113,6 @@ const entry = async () => {
   process.on('SIGQUIT', sigListener);
   process.on('SIGTERM', sigListener);
   process.on('exit', stopListener);
-}
+};
 
 entry();

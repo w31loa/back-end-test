@@ -28,6 +28,7 @@
     "src/**/*",
     "prisma/**/*",
     "scripts/**/*",
-    "db/**/*"
+    "db/**/*",
+    "types.d.ts"
   ],
 }

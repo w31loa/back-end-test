@@ -17,9 +17,6 @@ const configSchema = z.object({
   }),
   jwt: z.object({
     secret: z.string()
-  }),
-  example: z.object({
-    message: z.string()
   })
 })
 

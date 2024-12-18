@@ -5,11 +5,6 @@ export type AdapterParams = {
     client: PrismaClient;
     getContextClient: (tx?: unknown) => PrismaClient;
   };
-  example: {
-    client: {
-      hello: () => void;
-    };
-  };
 };
 
 export type UnknownTx = unknown;
