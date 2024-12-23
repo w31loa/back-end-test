@@ -23,7 +23,7 @@ export const buildCreate =
 
       if (existingFeedbackPost) {
         throw new InvalidDataError({
-          code: 'USER_FOUND',
+          code: 'FEEDBACK_POST_FOUND',
         });
       }
 
@@ -36,7 +36,7 @@ export const buildCreate =
           status_id,
         },
         select: {
-          id: true
+          id: true,
         },
       });
 

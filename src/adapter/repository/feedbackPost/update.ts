@@ -5,14 +5,13 @@ import { IFeedbackPost } from '@/domain/entity/feedbackPost';
 type Params = Pick<AdapterParams, 'db'>;
 
 export type Update = (
-  where: Prisma.FeedbackPostWhereUniqueInput,
-  data: Prisma.FeedbackPostUpdateInput,
+  data: Prisma.FeedbackPostUpdateArgs,
   tx?: UnknownTx
 ) => Promise<IFeedbackPost | never>;
 export const buildUpdate = ({ db }: Params): Update => {
-  return async (where, data, tx) => {
+  return async (data, tx) => {
     return (await db
       .getContextClient(tx)
-      .feedbackPost.update({ where, data })) as IFeedbackPost;
+      .feedbackPost.update(data)) as IFeedbackPost;
   };
 };

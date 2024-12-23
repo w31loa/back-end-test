@@ -4,6 +4,7 @@ import { buildDelete, Delete } from './delete';
 import { buildGet, Get } from './get';
 import { buildList, List } from './list';
 import { buildUpdate, Update } from './update';
+import { buildCount, Count } from './count';
 
 type Params = Pick<AdapterParams, 'db'>;
 
@@ -13,6 +14,7 @@ export type FeedbackPostRepository = {
   get: Get;
   list: List;
   update: Update;
+  count: Count;
 };
 
 export const buildFeedbackPostRepository = (
@@ -23,6 +25,7 @@ export const buildFeedbackPostRepository = (
   const get = buildGet(params);
   const list = buildList(params);
   const update = buildUpdate(params);
+  const count = buildCount(params);
 
   return {
     create,
@@ -30,5 +33,6 @@ export const buildFeedbackPostRepository = (
     get,
     list,
     update,
+    count,
   };
 };

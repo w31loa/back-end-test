@@ -14,6 +14,6 @@ export const buildCreate = ({feedbackPost}: Params): Create=>{
       user_id: req.user!.id
     });
 
-    return res.status(200).json(data);
+    return res.status(201).json(data);
   }
 }
