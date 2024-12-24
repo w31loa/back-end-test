@@ -20,5 +20,8 @@
 
 ## From me
 на всякий случай тг https://t.me/qqw01192
+
 тесты не писал потому, что такой задачи нет в тз!!!!
+
+ДО СКОРОЙ ВСТРЕЧИ!!!!
 ![))](https://media.tenor.com/DM7SdBiQKhEAAAAM/cat-underwater.gif)
