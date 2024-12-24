@@ -16,8 +16,8 @@ model User {
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
-  posts    FeedbackPost[]
-  upvotes  Upvote[]
+  posts   FeedbackPost[]
+  upvotes Upvote[]
 }
 
 model FeedbackPost {
@@ -32,9 +32,9 @@ model FeedbackPost {
   updated_at DateTime @updatedAt
 
   upvotes  Upvote[]
-  category Category  @relation(fields: [category_id], references: [id])
-  status   Status    @relation(fields: [status_id], references: [id])
-  user     User      @relation(fields: [user_id], references: [id])
+  category Category @relation(fields: [category_id], references: [id])
+  status   Status   @relation(fields: [status_id], references: [id])
+  user     User     @relation(fields: [user_id], references: [id])
 }
 
 model Category {

@@ -5,11 +5,16 @@
    ```
 2. Create .env file(look .env.example)
 
-2. Migrate:
+3. Migrate:
    ```bash
    npm run migrate:dev
-   ```
-3. Start:
+  ```
+4. Seed database:
+  ```bash
+  npm run seed
+  ```
+
+5. Start:
    ```bash
    npm run start:dev
    ```

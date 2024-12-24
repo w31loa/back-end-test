@@ -5,12 +5,12 @@ import { Prisma } from '@prisma/client';
 type Params = Pick<AdapterParams, 'db'>;
 
 export type List = (
-  data: Prisma.CategoryFindFirstArgs,
+  data: Prisma.StatusFindFirstArgs,
   tx?: UnknownTx
 ) => Promise<IStatus[] | never>;
 
 export const buildList = ({ db }: Params): List => {
   return async (data, tx) => {
-    return (await db.getContextClient(tx).category.findMany(data)) as IStatus[];
+    return (await db.getContextClient(tx).status.findMany(data)) as IStatus[];
   };
 };

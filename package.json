@@ -5,6 +5,7 @@
   "main": "index.js",
   "license": "ISC",
   "scripts": {
+    "seed": "ts-node prisma/seed.ts",
     "start:dev": "cross-env NODE_ENV=development dotenv -e .env -- nodemon --watch \"./src/**/*\" --watch \"./config/config.yml\" --signal SIGTERM --exec node -r @swc-node/register ./src/app.ts",
     "start:prod": "cross-env NODE_ENV=production node build/app.js",
     "build:prod": "tsc && npx swc ./src -d build",
@@ -43,6 +44,7 @@
     "prisma": "^5.4.2",
     "regenerator-runtime": "^0.14.0",
     "ts-jest": "^29.1.1",
+    "ts-node": "^10.9.2",
     "typescript": "*"
   },
   "dependencies": {
