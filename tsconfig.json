@@ -22,7 +22,7 @@
       "@/*": ["./*"],
       "@types": ["./types"]
     },
-    "types": ["@types/node"]
+    "types": ["@types/node", "Multer"]
   },
   "include": [
     "src/**/*",

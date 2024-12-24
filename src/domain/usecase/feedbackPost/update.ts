@@ -8,21 +8,27 @@ export type Update = (params: {
   description?: string;
   category_id?: string;
   status_id?: string;
-  user_id: string
+  user_id: string;
 }) => Promise<IFeedbackPost | never>;
 
 export const buildUpdate = ({ adapter }: UseCaseParams): Update => {
-  return async ({ id, title, description, category_id, status_id , user_id}) => {
-
+  return async ({
+    id,
+    title,
+    description,
+    category_id,
+    status_id,
+    user_id,
+  }) => {
     const postExists = await adapter.feedbackPostRepository.get({
-      where:{
+      where: {
         id,
-        user_id
-      }
-    })
+        user_id,
+      },
+    });
 
-    if(!postExists){
-      if(!postExists){
+    if (!postExists) {
+      if (!postExists) {
         throw new NotFoundError({
           code: 'FEEDBACK_POST_NOT_FOUND',
         });

@@ -17,6 +17,9 @@ const configSchema = z.object({
   }),
   jwt: z.object({
     secret: z.string()
+  }),
+  file: z.object({
+    patch: z.string()
   })
 })
 

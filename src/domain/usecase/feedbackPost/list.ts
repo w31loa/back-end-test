@@ -48,6 +48,11 @@ export const buildList = ({ adapter }: UseCaseParams): List => {
       orderBy,
       skip,
       take,
+      include:{
+        category: true,
+        status: true,
+        upvotes: true
+      }
     });
     const totalCount = await adapter.feedbackPostRepository.count({where});
 

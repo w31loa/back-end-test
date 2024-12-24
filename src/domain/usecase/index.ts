@@ -4,6 +4,7 @@ import { buildFeedbackPostUseCase, FeedbackPostUseCase } from './feedbackPost';
 import { buildStatusUseCase, StatusUseCase } from './status';
 import { UseCaseParams } from './types';
 import { buildUpvoteUseCase, UpvoteUseCase } from './upvote';
+import { buildUserUseCase, UserUseCase } from './user';
 
 export type UseCase = {
   auth: AuthUseCase;
@@ -11,6 +12,7 @@ export type UseCase = {
   upvote: UpvoteUseCase;
   status: StatusUseCase;
   category: CategoryUseCase;
+  user: UserUseCase;
 };
 
 export const buildUseCase = (params: UseCaseParams): UseCase => {
@@ -19,6 +21,7 @@ export const buildUseCase = (params: UseCaseParams): UseCase => {
   const upvote = buildUpvoteUseCase(params);
   const status = buildStatusUseCase(params);
   const category = buildCategoryUseCase(params);
+  const user = buildUserUseCase(params);
 
   return {
     auth,
@@ -26,5 +29,6 @@ export const buildUseCase = (params: UseCaseParams): UseCase => {
     upvote,
     status,
     category,
+    user,
   };
 };

@@ -11,18 +11,20 @@ export type List = (
     cursor?: Prisma.FeedbackPostWhereUniqueInput;
     where?: Prisma.FeedbackPostWhereInput;
     orderBy?: Prisma.FeedbackPostOrderByWithRelationInput;
+    include?: Prisma.FeedbackPostInclude;
   },
   tx?: UnknownTx
 ) => Promise<IFeedbackPost[]>;
 export const buildList = ({ db }: Params): List => {
   return async (params, tx) => {
-    const { skip, take, cursor, where, orderBy } = params;
+    const { skip, take, cursor, where, orderBy, include } = params;
     return (await db.getContextClient(tx).feedbackPost.findMany({
       skip,
       take,
       cursor,
       where,
       orderBy,
+      include,
     })) as IFeedbackPost[];
   };
 };
