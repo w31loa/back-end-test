@@ -20,7 +20,6 @@ export const buildGet = ({ adapter }: UseCaseParams): Get => {
         upvotes: true
       },
     });
-    console.log(id)
     if (!feedbackPost) {
       throw new NotFoundError({
         code: 'FEEDBACK_POST_NOT_FOUND',
