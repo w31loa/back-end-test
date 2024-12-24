@@ -9,6 +9,7 @@
    ```bash
    npm run migrate:dev
   ```
+  
 4. Seed database:
   ```bash
    npm run seed
