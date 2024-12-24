@@ -11,7 +11,7 @@ export const options: Options = {
     },
     servers: [{ url: '/api/v1' }]
   },
-  apis: ['./src/delivery/http/v1/handlers/**/*.ts', './src/domain/entity/**/*.ts'],
+  apis: ['./src/delivery/http/v1/handlers/**/*.ts', './src/domain/entity/**/*.ts', './src/domain/usecase/**/*.ts'],
 };
 
 export const buildSwagger = () => {

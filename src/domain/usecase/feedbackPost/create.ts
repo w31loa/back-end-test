@@ -8,9 +8,7 @@ export type Create = (params: {
   status_id: string;
   category_id: string;
   user_id: string;
-}) => Promise<{
-  feedbackPost: IFeedbackPost;
-}>;
+}) => Promise<IFeedbackPost>;
 
 export const buildCreate =
   ({ adapter }: UseCaseParams): Create =>
@@ -44,5 +42,5 @@ export const buildCreate =
         throw new InternalError();
       }
 
-      return { feedbackPost };
+      return feedbackPost;
     };

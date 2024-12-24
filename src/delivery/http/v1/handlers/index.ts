@@ -3,6 +3,9 @@ import { IHandler } from './types';
 import { DeliveryParams } from '@/delivery/types';
 import { buildAuthHandler } from './auth';
 import { buildFeedbackPostHandler } from './feedbackPost';
+import { buildUpvoteHandler } from './upvote';
+import { buildStatusHandler } from './status';
+import { buildCategoryHandler } from './category';
 
 export const buildHandler = (params: DeliveryParams): Express.Router => {
   const router = Express.Router();
@@ -10,6 +13,9 @@ export const buildHandler = (params: DeliveryParams): Express.Router => {
   const handlers: Array<IHandler> = [
     buildAuthHandler(params),
     buildFeedbackPostHandler(params),
+    buildUpvoteHandler(params),
+    buildStatusHandler(params),
+    buildCategoryHandler(params)
   ];
 
   for (let i = 0; i < handlers.length; i++) {

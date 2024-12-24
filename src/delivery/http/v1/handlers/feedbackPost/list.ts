@@ -1,11 +1,10 @@
-import { Response } from 'express';
+import { Request, Response } from 'express';
 import { DeliveryParams } from '@/delivery/types';
-import { AuthRequest } from '../types';
 import { SortByEnum } from '@/domain/usecase/feedbackPost/types';
 import { parseQueryNumberParam } from '@/lib';
 
 type Params = Pick<DeliveryParams, 'feedbackPost'>;
-export type List = (req: AuthRequest, res: Response) => Promise<Response>;
+export type List = (req: Request, res: Response) => Promise<Response>;
 
 export const buildList = ({ feedbackPost }: Params): List => {
   return async (req, res) => {
