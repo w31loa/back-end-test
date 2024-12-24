@@ -6,13 +6,12 @@
 2. Create .env file(look .env.example)
 
 3. Migrate:
-   ```bash
-   npm run migrate:dev
-  ```
-
+    ```bash
+    npm run migrate:dev
+   ```
 4. Seed database:
 
-   ```bash
+  ```bash
    npm run seed
   ```
 
