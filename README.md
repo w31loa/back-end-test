@@ -11,7 +11,7 @@
   ```
 4. Seed database:
   ```bash
-  npm run seed
+   npm run seed
   ```
 
 5. Start:
