@@ -2,10 +2,6 @@ import { buildStatusRepository, StatusRepository } from './repository/status/ind
 import { buildCategoryRepository, CategoryRepository } from './repository/category/index';
 import { AdapterParams } from '@/adapter/types';
 import {
-  CommentRepository,
-  buildCommentRepository,
-} from './repository/comment';
-import {
   FeedbackPostRepository,
   buildFeedbackPostRepository,
 } from './repository/feedbackPost';
@@ -17,7 +13,6 @@ export type Adapter = {
   feedbackPostRepository: FeedbackPostRepository;
   categoryRepository: CategoryRepository;
   statusRepository: StatusRepository;
-  commentRepository: CommentRepository;
   upvoteRepository: UpvoteRepository;
 };
 
@@ -26,7 +21,6 @@ export const buildAdapter = (params: AdapterParams): Adapter => {
   const feedbackPostRepository = buildFeedbackPostRepository(params);
   const categoryRepository = buildCategoryRepository(params);
   const statusRepository = buildStatusRepository(params);
-  const commentRepository = buildCommentRepository(params);
   const upvoteRepository = buildUpvoteRepository(params);
 
   return {
@@ -34,7 +28,6 @@ export const buildAdapter = (params: AdapterParams): Adapter => {
     feedbackPostRepository,
     categoryRepository,
     statusRepository,
-    commentRepository,
     upvoteRepository,
   };
 };

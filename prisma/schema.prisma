@@ -17,7 +17,6 @@ model User {
   updated_at DateTime @updatedAt
 
   posts    FeedbackPost[]
-  comments Comment[]
   upvotes  Upvote[]
 }
 
@@ -32,7 +31,6 @@ model FeedbackPost {
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
-  comments Comment[]
   upvotes  Upvote[]
   category Category  @relation(fields: [category_id], references: [id])
   status   Status    @relation(fields: [status_id], references: [id])
@@ -57,22 +55,6 @@ model Status {
   updated_at DateTime @updatedAt
 
   feedbackPosts FeedbackPost[]
-}
-
-model Comment {
-  id                String  @id @default(uuid())
-  content           String
-  parent_comment_id String?
-  post_id           String
-  user_id           String
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  post          FeedbackPost @relation(fields: [post_id], references: [id])
-  parentComment Comment?     @relation("NestedComments", fields: [parent_comment_id], references: [id])
-  childComments Comment[]    @relation("NestedComments")
-  user          User         @relation(fields: [user_id], references: [id])
 }
 
 model Upvote {

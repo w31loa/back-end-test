@@ -14,7 +14,6 @@ export const buildGet = ({ adapter }: UseCaseParams): Get => {
         id: true,
         title: true,
         category: true,
-        comments: true,
         description: true,
         status: true,
         created_at: true,
